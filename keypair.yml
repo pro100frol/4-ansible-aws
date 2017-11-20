@@ -1,0 +1,13 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  vars:
+    #your region
+    region: eu-west-1
+  tasks:
+    - name: remove key pair
+      ec2_key:
+        region: "{{ region }}" #your key pair name
+        name: inila
+        state: absent
