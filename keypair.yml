@@ -3,11 +3,15 @@
   connection: local
   gather_facts: no
   vars:
-    #your region
     region: eu-west-1
+    keyname: inilap
   tasks:
-    - name: remove key pair
-      ec2_key:
-        region: "{{ region }}" #your key pair name
-        name: inila
-        state: absent
+  - name: create key pair
+    ec2_key:
+      region: "{{ region }}"
+      name: "{{ keyname }}"
+    register: mykey
+  - debug: var=mykey
+  - name: write to file
+    copy: content="{{ mykey.key.private_key }}" dest="~/.ssh/{{ keyname }}.pem" mode=0600
+    when: mykey.changed

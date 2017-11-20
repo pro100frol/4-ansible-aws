@@ -1,0 +1,15 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  vars:
+    #your region
+    region: eu-west-1
+  tasks:
+    - name: remove security group
+      ec2_group:
+        region: "{{ region }}"
+        #your security group name
+        name: launch-wizard-1
+        description: sg unknown
+        state: absent
