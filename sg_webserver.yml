@@ -8,22 +8,22 @@
     #your ip address
     allowed_ip: 213.105.30.226/32
   tasks:
-    - name: create sg
+    - name: create security group
       ec2_group:
-      region: "{{ region }}" #your security group name
-      name: sg_webserver_frol
-      description: security group for frol webserver host
-      rules:
-        # allow ssh access from your ip address
-        - proto: tcp
-          from_port: 22
-          to_port: 22
-          cidr_ip: "{{ allowed_ip }}"
-        # allow http access from anywhere
-        - proto: tcp
-          from_port: 80
-          to_port: 80
-          cidr_ip: 0.0.0.0/0
-      rules_egress:
-        - proto: all
-          cidr_ip: 0.0.0.0/0
+        region: "{{ region }}" #your security group name
+        name: sg_webserver_frol
+        description: security group for frol webserver host
+        rules:
+          # allow ssh access from your ip address
+          - proto: tcp
+            from_port: 22
+            to_port: 22
+            cidr_ip: "{{ allowed_ip }}"
+          # allow http access from anywhere
+          - proto: tcp
+            from_port: 80
+            to_port: 80
+            cidr_ip: 0.0.0.0/0
+        rules_egress:
+          - proto: all
+            cidr_ip: 0.0.0.0/0
