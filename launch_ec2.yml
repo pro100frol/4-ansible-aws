@@ -1,0 +1,16 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  vars:
+    #your region
+    region: eu-west-1
+  tasks:
+    - name: EC2 basic provisioning
+      ec2:
+        region: "{{ region }}"
+        key_name: inilap
+        instance_type: t2.micro
+        image: ami-bb9a6bc2
+        wait: yes
+        group: sg_webserver_frol
