@@ -4,15 +4,15 @@
   gather_facts: no
   vars:
     #your region
-    region: ap-southeast-2
+    region: eu-west-1
     #your ip address
-    allowed_ip: 123.xxx.xxx.xxx/32
+    allowed_ip: 213.105.30.226/32
   tasks:
-    name: create security group
+    name: create sg
     ec2_group:
     region: "{{ region }}" #your security group name
-    name: sg_webserver_apsydney
-    description: security group for apsydney webserver host
+    name: sg_webserver_frol
+    description: security group for frol webserver host
     rules:
       # allow ssh access from your ip address
       - proto: tcp
