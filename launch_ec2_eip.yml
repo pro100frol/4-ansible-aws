@@ -13,9 +13,14 @@
         image: ami-bb9a6bc2
         wait: yes
         group: sg_webserver_frol
+        instance_tags:
+          group: newserver
+        exact_count: 1
+        count_tag:
+          group: newserver
       register: ec2
     - name: associate new EIP for the instance
       ec2_eip:
         region: "{{ region }}"
-        device_id: "{{ item.id }}"
-      with_items: ec2.instances
+        device_id: "{{ item }}"
+      with_items: "{{ ec2.instance_ids }}"
